@@ -85,6 +85,7 @@ export default function App() {
         <Memory size={size} processes={processes} />
       </div>
       <div>
+        <div>Blocks: {blocks.length}</div>
         <div>Free: {free}KB</div>
         <div>Average: {average}KB</div>
       </div>
