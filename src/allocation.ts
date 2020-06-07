@@ -83,7 +83,25 @@ export function allocate(
     .filter((block) => block.diff >= 0);
 
   if (!diffs.length) {
-    throw new Error("Not enough memory");
+    const free = blocks.reduce((acc, block) => acc + block.size, 0);
+    if (request.size > free) {
+      throw new Error("Not enough memory");
+    } else {
+      alert("Compacting memory");
+      let address = 0;
+      const newProcesses = processes.map((process) => {
+        process.address = address;
+        address += process.size;
+        return process;
+      });
+      newProcesses.push({
+        id: request.id,
+        size: request.size,
+        address,
+        color: randomColor({ luminosity: "light" }),
+      });
+      return newProcesses;
+    }
   }
 
   const target = diffs.reduce((prev, cur) =>
@@ -96,5 +114,11 @@ export function allocate(
     color: randomColor({ luminosity: "light" }),
   };
 
-  return [...processes, process];
+  return [...processes, process].sort((processA, processB) =>
+    processA.address < processB.address
+      ? -1
+      : processA.address > processB.address
+      ? 1
+      : 0
+  );
 }
