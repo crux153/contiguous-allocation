@@ -1,0 +1,24 @@
+.memory {
+  position: relative;
+  border: 1px solid black;
+  margin: 30px 0;
+}
+
+.process {
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 1px solid black;
+}
+
+.process > div {
+  margin: 0 5px;
+}
+
+.process .name {
+  font-weight: bold;
+}
