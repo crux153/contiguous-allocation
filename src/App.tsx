@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback } from "react";
-import randomColor from "randomcolor";
 import "./App.css";
 
 import { Memory, Process } from "./Memory";
